@@ -1219,7 +1219,7 @@
   <p class="contact-tagline">Open to product & delivery roles, consulting, and collaborations.</p>
 
   <div class="contact-links">
-    <a href="/cdn-cgi/l/email-protection#ceafafbda6a7a5afa6f7f68ea9a3afa7a2e0ada1a3" class="contact-link primary">✉ Email Me</a>
+    <a href="mailto:aashikah98@gmail.com" class="contact-link primary">✉ Email Me</a>
     <a href="https://linkedin.com/in/ashikah" target="_blank" class="contact-link">LinkedIn</a>
     <a href="tel:+916238078387" class="contact-link">+91 62380 78387</a>
   </div>
@@ -1228,16 +1228,19 @@
 </section>
 
 <script>
-// PAGE LOADER
-window.addEventListener('load', () => {
+// PAGE LOADER - with fallback
+function hideLoader() {
   const loader = document.getElementById('loader');
-  setTimeout(() => {
-    loader.style.transition = 'opacity 0.7s cubic-bezier(0.77,0,0.175,1), transform 0.7s cubic-bezier(0.77,0,0.175,1)';
-    loader.style.opacity = '0';
-    loader.style.transform = 'translateY(-100%)';
-    setTimeout(() => { loader.style.display = 'none'; }, 700);
-  }, 1600);
-});
+  if (!loader) return;
+  loader.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  loader.style.opacity = '0';
+  loader.style.transform = 'translateY(-100%)';
+  setTimeout(() => { loader.style.display = 'none'; }, 650);
+}
+// hide after 1.2s on load
+window.addEventListener('load', () => setTimeout(hideLoader, 1200));
+// safety fallback — always hide after 3s no matter what
+setTimeout(hideLoader, 3000);
 
 // CUSTOM CURSOR
 const dot = document.getElementById('cursorDot');
@@ -1286,7 +1289,7 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .contact-link').forEach
     const r = btn.getBoundingClientRect();
     const dx = (e.clientX - (r.left + r.width/2)) * 0.28;
     const dy = (e.clientY - (r.top + r.height/2)) * 0.28;
-    btn.style.transform = `translate(${dx}px, ${dy}px)`;
+  btn.style.transform = 'translate(' + dx + 'px, ' + dy + 'px)';
   });
   btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
 });
@@ -1309,6 +1312,8 @@ sections.forEach(s => navObs.observe(s));
 const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => {
   nav.style.boxShadow = window.scrollY > 60 ? '0 2px 20px rgba(0,0,0,0.06)' : '';
+});
+
 // ── TYPED TEXT
 const phrases = [
   'Building digital products end-to-end',
@@ -1353,9 +1358,9 @@ const heroStats = document.querySelector('.hero-stats');
 
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
-  if (heroLeft) heroLeft.style.transform = `translateY(${y * 0.18}px)`;
-  if (heroGraphic) heroGraphic.style.transform = `translateY(${y * 0.28}px)`;
-  if (heroStats) heroStats.style.transform = `translateY(${y * 0.1}px)`;
+  if (heroLeft) heroLeft.style.transform = 'translateY(' + (y * 0.18) + 'px)';
+  if (heroGraphic) heroGraphic.style.transform = 'translateY(' + (y * 0.28) + 'px)';
+  if (heroStats) heroStats.style.transform = 'translateY(' + (y * 0.1) + 'px)';
 }, { passive: true });
 </script>
 </body>
