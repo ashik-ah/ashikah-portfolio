@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashik A H — Product & Delivery Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0e0e;
+    --paper: #f5f2ec;
+    --cream: #ede9df;
+    --gold: #c8a84b;
+    --gold-light: #e8d49a;
+    --rust: #b85c38;
+    --slate: #4a5568;
+    --muted: #8a8078;
+    --card-bg: #ffffff;
+    --border: #d8d2c6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(245, 242, 236, 0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--slate);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 6rem 6rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(4rem, 7vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.3rem;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--rust);
+  }
+
+  .hero-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    color: var(--slate);
+    font-style: italic;
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+  }
+
+  .hero-bio {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--slate);
+    max-width: 440px;
+    margin-bottom: 3rem;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.9rem 2rem;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--rust); transform: translateY(-2px); }
+
+  .btn-secondary {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.9rem 2rem;
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover { background: var(--ink); color: var(--paper); }
+
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-graphic {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--cream) 0%, #e8dfc8 100%);
+  }
+
+  .hero-graphic::before {
+    content: '';
+    position: absolute;
+    width: 480px;
+    height: 480px;
+    border: 1px solid var(--gold-light);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .hero-graphic::after {
+    content: '';
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .hero-stats {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: var(--border);
+    border: 1.5px solid var(--border);
+  }
+
+  .stat-box {
+    background: var(--paper);
+    padding: 2rem 1.8rem;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Instrument Serif', serif;
+    font-size: 2.8rem;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-number span {
+    color: var(--gold);
+  }
+
+  .stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  /* ── SECTION BASE ── */
+  section {
+    padding: 6rem 6rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+  }
+
+  /* ── IMPACT ── */
+  .impact-section {
+    background: var(--cream);
+    padding: 5rem 6rem;
+    border-bottom: 1.5px solid var(--border);
+  }
+
+  .impact-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 1.5px;
+    background: var(--border);
+    border: 1.5px solid var(--border);
+  }
+
+  .impact-card {
+    background: var(--card-bg);
+    padding: 2.5rem 2rem;
+  }
+
+  .impact-card--large {
+    background: var(--ink);
+  }
+
+  .impact-card--large .impact-value { color: var(--gold); }
+  .impact-card--large .impact-label { color: #999; }
+
+  .impact-value {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.8rem, 4vw, 4rem);
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+  }
+
+  .impact-value span { color: var(--gold); }
+
+  .impact-label {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: var(--slate);
+  }
+
+  @media (max-width: 900px) {
+    .impact-grid { grid-template-columns: 1fr 1fr; }
+    .impact-section { padding: 4rem 1.5rem; }
+  }
+
+  /* ── SKILLS ── */
+  .skills-section {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .skills-section .section-title { color: var(--paper); }
+  .skills-section .section-label { color: var(--gold); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: #2a2a2a;
+    border: 2px solid #2a2a2a;
+    margin-top: 3rem;
+  }
+
+  .skill-category {
+    background: var(--ink);
+    padding: 2rem 1.8rem;
+  }
+
+  .skill-cat-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid #2a2a2a;
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .skill-list li {
+    font-size: 0.88rem;
+    color: #ccc;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .skill-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.7rem;
+  }
+
+  /* ── EXPERIENCE ── */
+  .experience-section { background: var(--paper); }
+
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 3.5rem;
+    padding-left: 2.5rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    transform: translateX(-3.5px);
+  }
+
+  .timeline-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .timeline-company {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+  }
+
+  .timeline-period {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+  }
+
+  .timeline-role {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .timeline-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .timeline-points li {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--slate);
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .timeline-points li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  /* ── PROJECTS ── */
+  .projects-section { background: var(--cream); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5px;
+    background: var(--border);
+    border: 1.5px solid var(--border);
+  }
+
+  .project-card {
+    background: var(--card-bg);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s;
+  }
+
+  .project-card:hover { transform: translateY(-4px); z-index: 2; box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+
+  .project-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .project-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+  }
+
+  .project-subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .project-desc {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--slate);
+    margin-bottom: 1.5rem;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    padding: 0.3rem 0.7rem;
+    background: var(--cream);
+    color: var(--slate);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .project-number {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1.2rem;
+    font-family: 'Instrument Serif', serif;
+    font-size: 5rem;
+    color: var(--cream);
+    line-height: 1;
+    font-style: italic;
+    pointer-events: none;
+  }
+
+  /* ── EDUCATION ── */
+  .education-section { background: var(--paper); }
+
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: var(--border);
+    border: 1.5px solid var(--border);
+  }
+
+  .edu-card {
+    background: var(--card-bg);
+    padding: 2.5rem;
+  }
+
+  .edu-degree {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .edu-school {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .edu-year {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+  }
+
+  .contact-section .section-title {
+    color: var(--paper);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    margin-bottom: 1rem;
+  }
+
+  .contact-section .section-label { color: var(--gold); }
+
+  .contact-tagline {
+    font-size: 1rem;
+    color: #aaa;
+    margin-bottom: 3rem;
+    font-style: italic;
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.3rem;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  .contact-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper);
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border: 1px solid #333;
+    transition: all 0.2s;
+  }
+
+  .contact-link:hover { border-color: var(--gold); color: var(--gold); }
+
+  .contact-link.primary {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--ink);
+  }
+
+  .contact-link.primary:hover { background: transparent; color: var(--gold); }
+
+  .footer-note {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.62rem;
+    color: #555;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── CURSOR ── */
+  .cursor-dot {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background 0.2s;
+  }
+
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s cubic-bezier(0.25,0.46,0.45,0.94),
+                height 0.3s cubic-bezier(0.25,0.46,0.45,0.94),
+                border-color 0.3s, opacity 0.3s;
+  }
+
+  body:has(a:hover) .cursor-dot,
+  body:has(button:hover) .cursor-dot { width: 12px; height: 12px; background: var(--rust); }
+  body:has(a:hover) .cursor-ring,
+  body:has(button:hover) .cursor-ring { width: 56px; height: 56px; border-color: var(--rust); opacity: 0.6; }
+
+  /* ── PAGE LOADER ── */
+  .page-loader {
+    position: fixed; inset: 0;
+    background: var(--ink);
+    z-index: 99997;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .loader-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--paper);
+    overflow: hidden;
+    letter-spacing: -0.02em;
+  }
+
+  .loader-name span {
+    display: inline-block;
+    transform: translateY(100%);
+    animation: loaderReveal 0.7s cubic-bezier(0.77,0,0.175,1) forwards;
+  }
+
+  .loader-bar-wrap {
+    width: 200px; height: 1px;
+    background: #333;
+    overflow: hidden;
+  }
+
+  .loader-bar {
+    height: 100%;
+    background: var(--gold);
+    width: 0%;
+    animation: loaderBar 1.2s cubic-bezier(0.77,0,0.175,1) 0.3s forwards;
+  }
+
+  @keyframes loaderReveal {
+    to { transform: translateY(0); }
+  }
+
+  @keyframes loaderBar {
+    to { width: 100%; }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.25,0.46,0.45,0.94),
+                transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+
+  .reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.8s cubic-bezier(0.25,0.46,0.45,0.94),
+                transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+
+  .reveal-left.revealed { opacity: 1; transform: translateX(0); }
+
+  .reveal-scale {
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94),
+                transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+
+  .reveal-scale.revealed { opacity: 1; transform: scale(1); }
+
+  /* stagger delays */
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+  .delay-3 { transition-delay: 0.3s; }
+  .delay-4 { transition-delay: 0.4s; }
+  .delay-5 { transition-delay: 0.5s; }
+
+  /* ── HERO ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes floatRing {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.04); }
+  }
+
+  .hero-graphic::before { animation: floatRing 5s ease-in-out infinite; }
+  .hero-graphic::after { animation: floatRing 5s ease-in-out 1.5s infinite; }
+
+  .hero-eyebrow { animation: fadeUp 0.7s cubic-bezier(0.25,0.46,0.45,0.94) 1.4s both; }
+  .hero-name { animation: fadeUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 1.55s both; }
+  .hero-title { animation: fadeUp 0.7s cubic-bezier(0.25,0.46,0.45,0.94) 1.7s both; }
+  .hero-bio { animation: fadeUp 0.7s cubic-bezier(0.25,0.46,0.45,0.94) 1.85s both; }
+  .hero-ctas { animation: fadeUp 0.7s cubic-bezier(0.25,0.46,0.45,0.94) 2s both; }
+  .hero-stats { animation: fadeUp 0.9s cubic-bezier(0.25,0.46,0.45,0.94) 1.6s both; }
+
+  /* ── MAGNETIC BUTTON ── */
+  .btn-primary, .btn-secondary {
+    will-change: transform;
+    transition: background 0.2s, color 0.2s, transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+
+  /* ── IMPACT NUMBER PULSE ── */
+  @keyframes countUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .impact-value.counting { animation: countUp 0.5s cubic-bezier(0.25,0.46,0.45,0.94) both; }
+
+  /* ── SKILL CARD HOVER ── */
+  .skill-category {
+    transition: background 0.25s, transform 0.25s cubic-bezier(0.25,0.46,0.45,0.94);
+    cursor: default;
+  }
+
+  .skill-category:hover {
+    background: #1a1a1a;
+    transform: translateY(-3px);
+  }
+
+  /* ── TIMELINE ITEM HOVER ── */
+  .timeline-item {
+    transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+
+  .timeline-item:hover { transform: translateX(6px); }
+
+  /* ── NAV LINK UNDERLINE SLIDE ── */
+  .nav-links a {
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1100px) {
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .projects-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+
+    .hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .hero-left { padding: 7rem 1.5rem 3rem; }
+    .hero-right { min-height: 320px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+
+    section { padding: 4rem 1.5rem; }
+
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .edu-grid { grid-template-columns: 1fr; }
+
+    .section-header { flex-direction: column; gap: 0.5rem; }
+  }
+
+  /* ── TYPED CURSOR ── */
+  .typed-cursor {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    color: var(--gold);
+    animation: blink 0.75s step-end infinite;
+    margin-left: 2px;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* ── PARALLAX ── */
+  .hero { overflow: hidden; }
+
+  .hero-left { will-change: transform; }
+  .hero-right { will-change: transform; }
+  .hero-graphic { will-change: transform; }
+
+  /* ── MARQUEE ── */
+  .marquee-wrap {
+    background: var(--gold);
+    overflow: hidden;
+    padding: 0.75rem 0;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1.5px solid var(--ink);
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 3rem;
+    white-space: nowrap;
+    animation: marquee 22s linear infinite;
+  }
+
+  .marquee-item {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    flex-shrink: 0;
+  }
+
+  .marquee-item span { margin: 0 1.5rem; color: var(--rust); }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE LOADER -->
+<div class="page-loader" id="loader">
+  <div class="loader-name">
+    <span style="animation-delay:0.1s">A</span><span style="animation-delay:0.17s">s</span><span style="animation-delay:0.24s">h</span><span style="animation-delay:0.31s">i</span><span style="animation-delay:0.38s">k</span>&nbsp;<span style="animation-delay:0.48s">A</span>&nbsp;<span style="animation-delay:0.58s">H</span>
+  </div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+</div>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Ashik A H</a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Product & Delivery Manager</p>
+    <h1 class="hero-name">Ashik<br><em>A H</em></h1>
+    <p class="hero-title"><span id="typed-text"></span><span class="typed-cursor">|</span></p>
+    <p class="hero-bio">
+      3.5+ years leading digital product delivery across web and mobile. I bridge the gap between business vision and technical execution — turning complex requirements into shipped products.
+    </p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Get in Touch</a>
+      <a href="#projects" class="btn-secondary">View Work</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-graphic"></div>
+    <div class="hero-stats">
+      <div class="stat-box">
+        <div class="stat-number">3.5<span>+</span></div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number"><span>€</span>2M<span>+</span></div>
+        <div class="stat-label">Project Value Delivered</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">6–12</div>
+        <div class="stat-label">Cross-Functional Team Size</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">4<span>+</span></div>
+        <div class="stat-label">European Markets</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Agile / Scrum <span>✦</span></span>
+    <span class="marquee-item">Product Roadmaps <span>✦</span></span>
+    <span class="marquee-item">Sprint Planning <span>✦</span></span>
+    <span class="marquee-item">Stakeholder Management <span>✦</span></span>
+    <span class="marquee-item">Cross-Functional Teams <span>✦</span></span>
+    <span class="marquee-item">Jira <span>✦</span></span>
+    <span class="marquee-item">Figma Handoffs <span>✦</span></span>
+    <span class="marquee-item">Business Analysis <span>✦</span></span>
+    <span class="marquee-item">MVP Prototyping <span>✦</span></span>
+    <span class="marquee-item">Agile / Scrum <span>✦</span></span>
+    <span class="marquee-item">Product Roadmaps <span>✦</span></span>
+    <span class="marquee-item">Sprint Planning <span>✦</span></span>
+    <span class="marquee-item">Stakeholder Management <span>✦</span></span>
+    <span class="marquee-item">Cross-Functional Teams <span>✦</span></span>
+    <span class="marquee-item">Jira <span>✦</span></span>
+    <span class="marquee-item">Figma Handoffs <span>✦</span></span>
+    <span class="marquee-item">Business Analysis <span>✦</span></span>
+    <span class="marquee-item">MVP Prototyping <span>✦</span></span>
+  </div>
+</div>
+
+<!-- IMPACT BANNER -->
+<section class="impact-section">
+  <div class="section-header reveal">
+    <span class="section-label">By the Numbers</span>
+    <h2 class="section-title">Delivered at Scale</h2>
+  </div>
+  <div class="impact-grid">
+    <div class="impact-card impact-card--large reveal">
+      <div class="impact-value" data-count="2" data-prefix="€" data-suffix="M+">€2M<span>+</span></div>
+      <div class="impact-label">Total project value managed across 2 major European digital transformation programmes</div>
+    </div>
+    <div class="impact-card reveal delay-1">
+      <div class="impact-value" data-count="4">4</div>
+      <div class="impact-label">European stakeholder markets — Austria, Netherlands, Switzerland & beyond</div>
+    </div>
+    <div class="impact-card reveal delay-2">
+      <div class="impact-value" data-count="2">2</div>
+      <div class="impact-label">End-to-end enterprise products delivered from discovery through to launch</div>
+    </div>
+    <div class="impact-card reveal delay-3">
+      <div class="impact-value" data-count="3">3</div>
+      <div class="impact-label">Platforms per product — Web, iOS & Android delivered simultaneously</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section" id="skills">
+  <div class="section-header">
+    <span class="section-label">01 / Core Competencies</span>
+    <h2 class="section-title">What I Bring</h2>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-category">
+      <div class="skill-cat-title">Product & Delivery</div>
+      <ul class="skill-list">
+        <li>End-to-End Product Delivery</li>
+        <li>Roadmap Planning</li>
+        <li>Sprint Management</li>
+        <li>Milestone Tracking</li>
+        <li>Release Coordination</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-title">Business Analysis</div>
+      <ul class="skill-list">
+        <li>Requirement Gathering</li>
+        <li>Product Vision Definition</li>
+        <li>Workshop Facilitation</li>
+        <li>User Story Writing</li>
+        <li>Backlog Structuring</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-title">Team & Process</div>
+      <ul class="skill-list">
+        <li>Dev + Design + QA Coordination</li>
+        <li>Design Thinking</li>
+        <li>Figma Design Handoffs</li>
+        <li>Agile / Scrum Ceremonies</li>
+        <li>Risk & Dependency Tracking</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-title">Tools & Platforms</div>
+      <ul class="skill-list">
+        <li>Jira & Confluence</li>
+        <li>Monday.com & Slack</li>
+        <li>Figma</li>
+        <li>Google Apps Script</li>
+        <li>MS Office Suite</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience-section" id="experience">
+  <div class="section-header">
+    <span class="section-label">02 / Career</span>
+    <h2 class="section-title">Experience</h2>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-meta">
+        <span class="timeline-company">CIED Technologies</span>
+        <span class="timeline-period">2023 – Present</span>
+      </div>
+      <h3 class="timeline-role">IT Project Manager</h3>
+      <ul class="timeline-points">
+        <li>Lead end-to-end delivery of multiple digital products across web and mobile — managing roadmaps, sprint plans, milestones, and stakeholder expectations simultaneously.</li>
+        <li>Translate complex business requirements into structured backlogs, user stories, and execution roadmaps; facilitate discovery sessions to align teams around shared product vision.</li>
+        <li>Coordinate cross-functional teams of 6–12 (backend engineers, mobile developers, designers, QA testers) in agile environments.</li>
+        <li>Serve as primary liaison between business stakeholders and technical teams — bridging product desirability, viability, and technical feasibility.</li>
+        <li>Manage international client relationships across time zones — presenting updates, managing scope changes, and ensuring quality delivery.</li>
+        <li>Built process automation tools using Google Apps Script to eliminate workflow inefficiencies.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-meta">
+        <span class="timeline-company">Linways Technologies</span>
+        <span class="timeline-period">2022 – 2023</span>
+      </div>
+      <h3 class="timeline-role">Product Consultant (SaaS)</h3>
+      <ul class="timeline-points">
+        <li>Conducted business analysis sessions with clients to gather, structure, and translate requirements into scalable SaaS product workflows.</li>
+        <li>Collaborated with product and engineering teams on feature planning, development cycles, and release delivery.</li>
+        <li>Facilitated onboarding workshops and product training sessions, improving adoption rates and feeding back user insights to product teams.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects-section" id="projects">
+  <div class="section-header">
+    <span class="section-label">03 / Work</span>
+    <h2 class="section-title">Key Projects</h2>
+  </div>
+
+  <div class="projects-grid">
+    <div class="project-card">
+      <span class="project-tag">Web · iOS · Android · Europe</span>
+      <h3 class="project-title">Resident Management Platform</h3>
+      <p class="project-subtitle">Digital Transformation · European Organisation</p>
+      <p class="project-desc">
+        €2M+ programme helping a European organisation modernise operations through a fully digital resident management system — web portal, iOS & Android apps. Managed international stakeholders across Austria, Netherlands, and Switzerland from discovery through to launch.
+      </p>
+      <div class="project-tags">
+        <span class="tag">€2M+ Budget</span>
+        <span class="tag">Austria · NL · CH</span>
+        <span class="tag">Agile</span>
+        <span class="tag">Figma Handoff</span>
+        <span class="tag">Jira</span>
+      </div>
+      <div class="project-number">01</div>
+    </div>
+
+    <div class="project-card">
+      <span class="project-tag">Climate · Sustainability · Europe</span>
+      <h3 class="project-title">FarmTool</h3>
+      <p class="project-subtitle">Carbon Emission & Sustainability Certification Platform</p>
+      <p class="project-desc">
+        €2M+ platform for a European sustainability certification body — digitising carbon emission tracking and compliance workflows for agricultural organisations. Managed complex regulatory requirements and cross-functional delivery across an 8–12 member team with European stakeholders.
+      </p>
+      <div class="project-tags">
+        <span class="tag">€2M+ Budget</span>
+        <span class="tag">Carbon Tracking</span>
+        <span class="tag">Compliance</span>
+        <span class="tag">Team of 12</span>
+        <span class="tag">QA Coordination</span>
+      </div>
+      <div class="project-number">02</div>
+    </div>
+
+    <div class="project-card">
+      <span class="project-tag">Internal · Automation</span>
+      <h3 class="project-title">Automation & MVP Initiatives</h3>
+      <p class="project-subtitle">Process Improvement</p>
+      <p class="project-desc">
+        Independently conceptualised and validated early-stage MVP ideas using design thinking. Built lightweight automation tools with Google Apps Script to eliminate manual processes and improve team productivity before committing engineering resources.
+      </p>
+      <div class="project-tags">
+        <span class="tag">Google Apps Script</span>
+        <span class="tag">MVP</span>
+        <span class="tag">Design Thinking</span>
+      </div>
+      <div class="project-number">03</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="education-section" id="education">
+  <div class="section-header">
+    <span class="section-label">04 / Education</span>
+    <h2 class="section-title">Academic Background</h2>
+  </div>
+
+  <div class="edu-grid">
+    <div class="edu-card">
+      <p class="edu-school">MG University</p>
+      <h3 class="edu-degree">MBA — Information Systems & Marketing</h3>
+      <p class="edu-year">2020 – 2022</p>
+    </div>
+    <div class="edu-card">
+      <p class="edu-school">Kerala University</p>
+      <h3 class="edu-degree">BCA — Computer Applications</h3>
+      <p class="edu-year">2016 – 2019</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-header" style="justify-content:center; flex-direction:column; align-items:center; text-align:center;">
+    <span class="section-label">05 / Let's Talk</span>
+    <h2 class="section-title">Get in Touch</h2>
+  </div>
+  <p class="contact-tagline">Open to product & delivery roles, consulting, and collaborations.</p>
+
+  <div class="contact-links">
+    <a href="/cdn-cgi/l/email-protection#ceafafbda6a7a5afa6f7f68ea9a3afa7a2e0ada1a3" class="contact-link primary">✉ Email Me</a>
+    <a href="https://linkedin.com/in/ashikah" target="_blank" class="contact-link">LinkedIn</a>
+    <a href="tel:+916238078387" class="contact-link">+91 62380 78387</a>
+  </div>
+
+  <p class="footer-note">Kollam, India &nbsp;·&nbsp; Available for remote & hybrid roles &nbsp;·&nbsp; © 2025 Ashik A H</p>
+</section>
+
+<script>
+// PAGE LOADER
+window.addEventListener('load', () => {
+  const loader = document.getElementById('loader');
+  setTimeout(() => {
+    loader.style.transition = 'opacity 0.7s cubic-bezier(0.77,0,0.175,1), transform 0.7s cubic-bezier(0.77,0,0.175,1)';
+    loader.style.opacity = '0';
+    loader.style.transform = 'translateY(-100%)';
+    setTimeout(() => { loader.style.display = 'none'; }, 700);
+  }, 1600);
+});
+
+// CUSTOM CURSOR
+const dot = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+let ringX = 0, ringY = 0, mouseX = 0, mouseY = 0;
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  dot.style.left = mouseX + 'px';
+  dot.style.top = mouseY + 'px';
+});
+function animateRing() {
+  ringX += (mouseX - ringX) * 0.12;
+  ringY += (mouseY - ringY) * 0.12;
+  ring.style.left = ringX + 'px';
+  ring.style.top = ringY + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+if ('ontouchstart' in window) { dot.style.display='none'; ring.style.display='none'; }
+
+// SCROLL REVEAL
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-scale');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) { entry.target.classList.add('revealed'); observer.unobserve(entry.target); }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => observer.observe(el));
+
+document.querySelectorAll('.timeline-item').forEach((el, i) => {
+  el.classList.add('reveal'); el.style.transitionDelay = (i * 0.15) + 's'; observer.observe(el);
+});
+document.querySelectorAll('.project-card').forEach((el, i) => {
+  el.classList.add('reveal-scale'); el.style.transitionDelay = (i * 0.12) + 's'; observer.observe(el);
+});
+document.querySelectorAll('.skill-category').forEach((el, i) => {
+  el.classList.add('reveal'); el.style.transitionDelay = (i * 0.1) + 's'; observer.observe(el);
+});
+document.querySelectorAll('.edu-card').forEach((el, i) => {
+  el.classList.add('reveal'); el.style.transitionDelay = (i * 0.15) + 's'; observer.observe(el);
+});
+
+// MAGNETIC BUTTONS
+document.querySelectorAll('.btn-primary, .btn-secondary, .contact-link').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const r = btn.getBoundingClientRect();
+    const dx = (e.clientX - (r.left + r.width/2)) * 0.28;
+    const dy = (e.clientY - (r.top + r.height/2)) * 0.28;
+    btn.style.transform = `translate(${dx}px, ${dy}px)`;
+  });
+  btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+});
+
+// ACTIVE NAV
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const navObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(a => a.style.color = '');
+      const active = document.querySelector('.nav-links a[href="#' + entry.target.id + '"]');
+      if (active) active.style.color = 'var(--gold)';
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(s => navObs.observe(s));
+
+// NAV SCROLL SHADOW
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  nav.style.boxShadow = window.scrollY > 60 ? '0 2px 20px rgba(0,0,0,0.06)' : '';
+// ── TYPED TEXT
+const phrases = [
+  'Building digital products end-to-end',
+  'Leading cross-functional teams',
+  'Turning vision into shipped products',
+  'Managing €2M+ European programmes',
+  'Bridging business & technology'
+];
+let pIdx = 0, cIdx = 0, deleting = false;
+const typedEl = document.getElementById('typed-text');
+
+function type() {
+  if (!typedEl) return;
+  const current = phrases[pIdx];
+  if (!deleting) {
+    typedEl.textContent = current.slice(0, cIdx + 1);
+    cIdx++;
+    if (cIdx === current.length) {
+      deleting = true;
+      setTimeout(type, 2200);
+      return;
+    }
+    setTimeout(type, 55);
+  } else {
+    typedEl.textContent = current.slice(0, cIdx - 1);
+    cIdx--;
+    if (cIdx === 0) {
+      deleting = false;
+      pIdx = (pIdx + 1) % phrases.length;
+      setTimeout(type, 400);
+      return;
+    }
+    setTimeout(type, 28);
+  }
+}
+setTimeout(type, 2200);
+
+// ── PARALLAX
+const heroLeft = document.querySelector('.hero-left');
+const heroGraphic = document.querySelector('.hero-graphic');
+const heroStats = document.querySelector('.hero-stats');
+
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (heroLeft) heroLeft.style.transform = `translateY(${y * 0.18}px)`;
+  if (heroGraphic) heroGraphic.style.transform = `translateY(${y * 0.28}px)`;
+  if (heroStats) heroStats.style.transform = `translateY(${y * 0.1}px)`;
+}, { passive: true });
+</script>
+</body>
+</html>
