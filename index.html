@@ -1,90 +1,94 @@
+
+raw
+Index · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ashik A H — Product & Delivery Manager</title>
+<title>Ashik A H — Project Manager | AI Operations | SaaS Implementation</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="shortcut icon" href="favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Syne+Mono&family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#050508;--bg2:#0a0a0f;--surface:#0f0f18;
-  --border:#ffffff0f;--border2:#ffffff1a;
-  --text:#f0eeea;--muted:#6b6880;
-  --accent:#c8f135;--accent2:#7c6af7;--accent3:#f7a26a;
+  --bg:#080c14;--bg2:#0c1220;--surface:#111827;
+  --border:#ffffff0a;--border2:#ffffff14;
+  --text:#e8edf5;--muted:#6b7a99;
+  --accent:#4f7ef7;--accent2:#7c9df5;--accent3:#a5b8f7;
+  --accent-glow:rgba(79,126,247,.15);
 }
 html{scroll-behavior:smooth;overflow-x:hidden}
-body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none}
-
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none}
+ 
 /* CURSOR */
 #cdot{width:6px;height:6px;background:var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .15s,height .15s,background .2s}
-#cring{width:40px;height:40px;border:1px solid var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .4s cubic-bezier(.25,.46,.45,.94),height .4s cubic-bezier(.25,.46,.45,.94),opacity .3s}
+#cring{width:40px;height:40px;border:1px solid var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);mix-blend-mode:normal;opacity:.5;transition:width .4s cubic-bezier(.25,.46,.45,.94),height .4s cubic-bezier(.25,.46,.45,.94),opacity .3s}
 body.hov #cdot{width:10px;height:10px;background:var(--accent2)}
-body.hov #cring{width:64px;height:64px;opacity:.5;border-color:var(--accent2)}
-
+body.hov #cring{width:60px;height:60px;opacity:.35;border-color:var(--accent2)}
+ 
 /* SPOTLIGHT */
-#spot{position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(circle 350px at 50% 50%,rgba(200,241,53,.035) 0%,transparent 70%)}
-
+#spot{position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(circle 400px at 50% 50%,rgba(79,126,247,.04) 0%,transparent 70%)}
+ 
 /* CANVAS */
-#cv{position:fixed;inset:0;z-index:0;opacity:.55;pointer-events:none}
-
+#cv{position:fixed;inset:0;z-index:0;opacity:.4;pointer-events:none}
+ 
 /* LOADER */
 #ldr{position:fixed;inset:0;background:var(--bg);z-index:99997;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.8rem}
-.ldr-name{font-size:clamp(2.5rem,9vw,5.5rem);font-weight:800;letter-spacing:-.04em;line-height:1;overflow:hidden}
+.ldr-name{font-size:clamp(2.5rem,9vw,5.5rem);font-weight:800;letter-spacing:-.04em;line-height:1;overflow:hidden;font-family:'Inter',sans-serif}
 .ldr-name span{display:inline-block;transform:translateY(110%);animation:sup .7s cubic-bezier(.77,0,.175,1) forwards}
 .ldr-bar{width:260px;height:1px;background:#ffffff08;overflow:hidden;position:relative}
 .ldr-bar::after{content:'';position:absolute;left:-100%;top:0;width:100%;height:100%;background:linear-gradient(90deg,transparent,var(--accent),transparent);animation:lscan 1s ease .3s forwards}
 @keyframes lscan{to{left:100%}}
-.ldr-p{font-family:'Syne Mono',monospace;font-size:.7rem;letter-spacing:.2em;color:var(--muted)}
+.ldr-p{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.2em;color:var(--muted)}
 @keyframes sup{to{transform:translateY(0)}}
-
+ 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 3rem;transition:background .3s,backdrop-filter .3s,border-color .3s;border-bottom:1px solid transparent}
-nav.sc{background:rgba(5,5,8,.85);backdrop-filter:blur(20px);border-color:var(--border)}
-.nav-logo{font-family:'Syne Mono',monospace;font-size:.78rem;letter-spacing:.14em;color:var(--accent);text-decoration:none;text-transform:uppercase}
+nav.sc{background:rgba(8,12,20,.9);backdrop-filter:blur(24px);border-color:var(--border)}
+.nav-logo{font-family:'DM Mono',monospace;font-size:.78rem;letter-spacing:.14em;color:var(--accent);text-decoration:none;text-transform:uppercase}
 .nav-ul{display:flex;gap:2.5rem;list-style:none}
-.nav-ul a{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;position:relative}
+.nav-ul a{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;position:relative;font-weight:500}
 .nav-ul a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s}
 .nav-ul a:hover{color:var(--text)}.nav-ul a:hover::after{width:100%}
-.nav-btn{font-family:'Syne Mono',monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:.6rem 1.4rem;border:1px solid var(--accent);color:var(--accent);text-decoration:none;transition:background .2s,color .2s}
+.nav-btn{font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;padding:.6rem 1.4rem;border:1px solid var(--accent);color:var(--accent);text-decoration:none;transition:background .2s,color .2s;border-radius:3px}
 .nav-btn:hover{background:var(--accent);color:var(--bg)}
-
+ 
 /* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 3rem 5rem;position:relative;z-index:2;overflow:hidden}
-.hero-tag{font-family:'Syne Mono',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:2rem;display:flex;align-items:center;gap:1rem;opacity:0;animation:fup .6s .3s both}
+.hero-tag{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:2rem;display:flex;align-items:center;gap:1rem;opacity:0;animation:fup .6s .3s both}
 .hero-tag::before{content:'';width:36px;height:1px;background:var(--accent)}
 .hero-name{font-size:clamp(4.5rem,13vw,12rem);font-weight:800;letter-spacing:-.04em;line-height:.9;margin-bottom:2rem}
 .hero-name .ln{display:block;overflow:hidden}
 .hero-name .ln span{display:block;transform:translateY(110%);animation:sup .95s cubic-bezier(.77,0,.175,1) both}
 .hero-name .ln:nth-child(1) span{animation-delay:.45s}
-.hero-name .ln:nth-child(2) span{animation-delay:.6s;font-family:'Libre Baskerville',serif;font-style:italic;color:var(--accent)}
+.hero-name .ln:nth-child(2) span{animation-delay:.6s;font-family:'Playfair Display',serif;font-style:italic;color:var(--accent)}
 .hero-bot{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;opacity:0;animation:fup .7s .95s both}
 .hero-bio{max-width:400px;font-size:.97rem;line-height:1.75;color:var(--muted)}
 .hero-bio strong{color:var(--text)}
 .hero-nums{display:flex;gap:3rem;flex-shrink:0}
 .hnum-val{font-size:2.8rem;font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--accent)}
-.hnum-lbl{font-family:'Syne Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.3rem}
+.hnum-lbl{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.3rem}
 .hero-scr{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;animation:fup .6s 1.4s both}
-.hero-scr span{font-family:'Syne Mono',monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.hero-scr span{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 .scr-ln{width:1px;height:48px;background:linear-gradient(to bottom,var(--accent),transparent);animation:spulse 2s ease-in-out infinite}
 @keyframes spulse{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(.4);opacity:.3}}
 @keyframes fup{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-
+ 
 /* MARQUEE */
 .mq{position:relative;z-index:2;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;padding:.85rem 0;background:var(--bg2)}
 .mq-tr{display:flex;white-space:nowrap;animation:mq 28s linear infinite}
-.mq-i{font-family:'Syne Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:0 2rem;flex-shrink:0}
+.mq-i{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:0 2rem;flex-shrink:0}
 .mq-i .ac{color:var(--accent);margin-right:1.8rem}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
+ 
 /* SECTIONS */
 section{position:relative;z-index:2}
-.slbl{font-family:'Syne Mono',monospace;font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.9rem;display:flex;align-items:center;gap:.7rem}
+.slbl{font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.9rem;display:flex;align-items:center;gap:.7rem}
 .slbl::before{content:'';width:22px;height:1px;background:var(--accent)}
 .stitle{font-size:clamp(2.5rem,6vw,5rem);font-weight:800;letter-spacing:-.03em;line-height:.95}
-
+ 
 /* IMPACT */
 .imp{padding:7rem 3rem;background:var(--bg2);border-bottom:1px solid var(--border)}
 .imp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:4rem}
@@ -93,35 +97,35 @@ section{position:relative;z-index:2}
 .imp-c::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.25,.46,.45,.94)}
 .imp-c:hover::before{transform:scaleX(1)}
 .imp-n{font-size:clamp(3rem,5vw,4.5rem);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:.75rem}
-.imp-n .sy{color:var(--accent);font-family:'Libre Baskerville',serif;font-style:italic}
+.imp-n .sy{color:var(--accent);font-family:'Playfair Display',serif;font-style:italic}
 .imp-d{font-size:.84rem;line-height:1.6;color:var(--muted)}
 .imp-c--h{background:var(--surface)}.imp-c--h .imp-n{color:var(--accent)}
-
+ 
 /* SKILLS */
 .skl{padding:7rem 3rem;background:var(--bg)}
 .skl-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:4rem}
 .skl-c{background:var(--bg2);padding:3rem;position:relative;overflow:hidden;transition:background .3s}
 .skl-c:hover{background:var(--surface)}
-.skl-n{font-family:'Syne Mono',monospace;font-size:.58rem;letter-spacing:.15em;color:var(--border2);margin-bottom:1.5rem}
+.skl-n{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;color:var(--border2);margin-bottom:1.5rem}
 .skl-t{font-size:1.4rem;font-weight:700;letter-spacing:-.02em;margin-bottom:1.5rem}
 .skl-tags{display:flex;flex-wrap:wrap;gap:.45rem}
-.skl-tag{font-family:'Syne Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.38rem .85rem;border:1px solid var(--border2);color:var(--muted);transition:all .2s}
-.skl-c:hover .skl-tag:hover{border-color:var(--accent);color:var(--accent);background:rgba(200,241,53,.05)}
-.skl-gly{position:absolute;right:2rem;bottom:1rem;font-size:6rem;font-weight:800;color:rgba(255,255,255,.025);letter-spacing:-.05em;line-height:1;pointer-events:none;font-style:italic;font-family:'Libre Baskerville',serif}
-
+.skl-tag{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.38rem .85rem;border:1px solid var(--border2);color:var(--muted);transition:all .2s}
+.skl-c:hover .skl-tag:hover{border-color:var(--accent);color:var(--accent);background:rgba(79,126,247,.08)}
+.skl-gly{position:absolute;right:2rem;bottom:1rem;font-size:6rem;font-weight:800;color:rgba(255,255,255,.025);letter-spacing:-.05em;line-height:1;pointer-events:none;font-style:italic;font-family:'Playfair Display',serif}
+ 
 /* EXPERIENCE */
 .exp{padding:7rem 3rem;background:var(--bg2);border-top:1px solid var(--border)}
 .exp-item{display:grid;grid-template-columns:1fr 2fr;gap:4rem;padding:3rem 0;border-bottom:1px solid var(--border);position:relative;overflow:hidden;transition:background .4s}
-.exp-item:hover{background:rgba(200,241,53,.015)}
-.exp-co{font-family:'Syne Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem}
-.exp-per{font-family:'Syne Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:1rem}
-.exp-bdg{display:inline-block;font-family:'Syne Mono',monospace;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .75rem;border:1px solid var(--border2);color:var(--muted)}
+.exp-item:hover{background:rgba(79,126,247,.03)}
+.exp-co{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem}
+.exp-per{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:1rem}
+.exp-bdg{display:inline-block;font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .75rem;border:1px solid var(--border2);color:var(--muted)}
 .exp-role{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:1.5rem}
 .exp-pts{list-style:none;display:flex;flex-direction:column;gap:.7rem}
 .exp-pts li{font-size:.9rem;line-height:1.72;color:var(--muted);padding-left:1.2rem;position:relative;transition:color .2s}
 .exp-pts li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:.68rem;top:.2rem}
 .exp-item:hover .exp-pts li{color:#a0a0b8}
-
+ 
 /* PROJECTS */
 .prj{padding:7rem 0 7rem 3rem;background:var(--bg);border-top:1px solid var(--border);overflow:hidden}
 .prj-hd{margin-bottom:4rem;padding-right:3rem}
@@ -130,59 +134,81 @@ section{position:relative;z-index:2}
 .prj-c{flex-shrink:0;width:420px;background:var(--surface);border:1px solid var(--border);padding:2.5rem;position:relative;overflow:hidden;scroll-snap-align:start;transition:border-color .3s,transform .4s cubic-bezier(.25,.46,.45,.94);cursor:none}
 .prj-c:hover{border-color:var(--border2);transform:translateY(-8px)}
 .prj-ct{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:2rem}
-.prj-tag{font-family:'Syne Mono',monospace;font-size:.57rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.prj-tag{font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
 .prj-ar{width:30px;height:30px;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:.75rem;color:var(--muted);transition:all .3s;flex-shrink:0}
 .prj-c:hover .prj-ar{border-color:var(--accent);color:var(--accent);transform:rotate(45deg)}
 .prj-title{font-size:1.55rem;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:.45rem}
-.prj-sub{font-family:'Syne Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem}
+.prj-sub{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem}
 .prj-desc{font-size:.87rem;line-height:1.7;color:var(--muted);margin-bottom:1.5rem}
 .prj-chips{display:flex;flex-wrap:wrap;gap:.4rem}
-.prj-chip{font-family:'Syne Mono',monospace;font-size:.57rem;letter-spacing:.08em;text-transform:uppercase;padding:.28rem .65rem;background:rgba(255,255,255,.03);border:1px solid var(--border);color:var(--muted)}
-.prj-num{position:absolute;right:1.5rem;bottom:.8rem;font-size:7rem;font-weight:800;letter-spacing:-.05em;color:rgba(255,255,255,.03);line-height:1;font-style:italic;font-family:'Libre Baskerville',serif;pointer-events:none}
+.prj-chip{font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.08em;text-transform:uppercase;padding:.28rem .65rem;background:rgba(255,255,255,.03);border:1px solid var(--border);color:var(--muted)}
+.prj-num{position:absolute;right:1.5rem;bottom:.8rem;font-size:7rem;font-weight:800;letter-spacing:-.05em;color:rgba(255,255,255,.03);line-height:1;font-style:italic;font-family:'Playfair Display',serif;pointer-events:none}
 .prj-c--h{background:var(--accent);border-color:var(--accent)}
 .prj-c--h .prj-tag,.prj-c--h .prj-title,.prj-c--h .prj-sub,.prj-c--h .prj-desc{color:var(--bg)}
 .prj-c--h .prj-ar{border-color:rgba(0,0,0,.2);color:var(--bg)}
 .prj-c--h .prj-chip{background:rgba(0,0,0,.07);border-color:rgba(0,0,0,.12);color:var(--bg)}
 .prj-c--h .prj-num{color:rgba(0,0,0,.06)}
-
+ 
 /* EDUCATION */
 .edu{padding:7rem 3rem;background:var(--bg2);border-top:1px solid var(--border)}
 .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:4rem}
 .edu-c{background:var(--bg);padding:3rem;transition:background .3s}
 .edu-c:hover{background:var(--surface)}
-.edu-sch{font-family:'Syne Mono',monospace;font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
+.edu-sch{font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
 .edu-deg{font-size:1.45rem;font-weight:700;letter-spacing:-.02em;line-height:1.2;margin-bottom:.5rem}
-.edu-yr{font-family:'Syne Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.1em}
-
+.edu-yr{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.1em}
+ 
 /* CONTACT */
 .cta{padding:8rem 3rem;background:var(--bg);border-top:1px solid var(--border);text-align:center;position:relative;overflow:hidden}
-.cta::before{content:'';position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(200,241,53,.035) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.cta::before{content:'';position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(79,126,247,.04) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
 .cta-big{font-size:clamp(3rem,11vw,9rem);font-weight:800;letter-spacing:-.04em;line-height:.88;margin:2rem 0}
-.cta-big em{font-style:italic;font-family:'Libre Baskerville',serif;color:var(--accent)}
-.cta-sub{font-size:1rem;color:var(--muted);margin-bottom:3rem;font-style:italic;font-family:'Libre Baskerville',serif;font-size:1.15rem}
+.cta-big em{font-style:italic;font-family:'Playfair Display',serif;color:var(--accent)}
+.cta-sub{font-size:1rem;color:var(--muted);margin-bottom:3rem;font-style:italic;font-family:'Playfair Display',serif;font-size:1.15rem}
 .cta-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:4rem}
-.btn-a{font-family:'Syne Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:1rem 2.5rem;background:var(--accent);color:var(--bg);text-decoration:none;display:inline-block;transition:transform .2s,box-shadow .2s}
-.btn-a:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(200,241,53,.25)}
-.btn-g{font-family:'Syne Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:1rem 2.5rem;border:1px solid var(--border2);color:var(--text);text-decoration:none;display:inline-block;transition:border-color .2s,color .2s}
+.btn-a{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:1rem 2.5rem;background:var(--accent);color:var(--bg);text-decoration:none;display:inline-block;transition:transform .2s,box-shadow .2s}
+.btn-a:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(79,126,247,.2)}
+.btn-g{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:1rem 2.5rem;border:1px solid var(--border2);color:var(--text);text-decoration:none;display:inline-block;transition:border-color .2s,color .2s}
 .btn-g:hover{border-color:var(--accent);color:var(--accent)}
-.cta-meta{font-family:'Syne Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.cta-meta{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .cta-meta a{color:var(--muted);text-decoration:none;transition:color .2s}.cta-meta a:hover{color:var(--accent)}
-
+ 
 /* TYPED */
 #typ{color:var(--accent);font-style:normal}
 .tcur{display:inline-block;width:2px;height:.9em;background:var(--accent);margin-left:3px;vertical-align:middle;animation:blink .7s step-end infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-
+ 
 /* REVEAL */
 .rv{opacity:0;transform:translateY(48px);transition:opacity .9s cubic-bezier(.25,.46,.45,.94),transform .9s cubic-bezier(.25,.46,.45,.94)}
 .rv.on{opacity:1;transform:translateY(0)}
 .rvs{opacity:0;transform:scale(.88);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94)}
 .rvs.on{opacity:1;transform:scale(1)}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
-
+ 
 /* TILT */
+/* PRAO PROJECT CARDS */
+.prj-prao{margin-top:1.5rem;display:flex;flex-direction:column;gap:0}
+.prao-block{padding:.9rem 0;border-top:1px solid var(--border)}
+.prao-block:first-child{border-top:none;padding-top:0}
+.prao-label{
+  font-family:'DM Mono',monospace;
+  font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:.4rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+.prao-label::before{content:'';width:12px;height:1px;background:var(--accent);opacity:.5}
+.prao-text{font-size:.82rem;line-height:1.65;color:var(--muted)}
+.prao-text strong{color:var(--text);font-weight:600}
+.prao-actions{list-style:none;display:flex;flex-direction:column;gap:.3rem;margin-top:.3rem}
+.prao-actions li{font-size:.8rem;line-height:1.55;color:var(--muted);padding-left:1rem;position:relative}
+.prao-actions li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:.65rem;opacity:.7}
+.prao-outcome{font-size:.83rem;line-height:1.65;color:var(--text);font-weight:500}
+ 
+/* wider cards for PRAO content */
+.prj-sw .prj-c{width:480px}
+@media(max-width:900px){.prj-sw .prj-c{width:320px}}
+ 
 .tlt{transform-style:preserve-3d;transition:transform .5s cubic-bezier(.25,.46,.45,.94)}
-
+ 
 /* RESPONSIVE */
 @media(max-width:900px){
   nav{padding:1rem 1.5rem}.nav-ul,.nav-btn{display:none}
@@ -193,12 +219,12 @@ section{position:relative;z-index:2}
 </style>
 </head>
 <body>
-
+ 
 <div id="spot"></div>
 <div id="cdot"></div>
 <div id="cring"></div>
 <canvas id="cv"></canvas>
-
+ 
 <!-- LOADER -->
 <div id="ldr">
   <div class="ldr-name">
@@ -207,7 +233,7 @@ section{position:relative;z-index:2}
   <div class="ldr-bar"></div>
   <div class="ldr-p" id="lpct">Loading...</div>
 </div>
-
+ 
 <!-- NAV -->
 <nav id="nav">
   <a class="nav-logo" href="#">ASHIK.AH-PM</a>
@@ -220,32 +246,32 @@ section{position:relative;z-index:2}
   </ul>
   <a href="mailto:aashikah98@gmail.com" class="nav-btn">Hire Me</a>
 </nav>
-
+ 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <p class="hero-tag">Product &amp; Delivery Manager &nbsp;·&nbsp; Kollam, India</p>
+  <p class="hero-tag">Project Manager · AI Operations · SaaS Implementation · Kollam, India</p>
   <h1 class="hero-name">
     <span class="ln"><span>ASHIK</span></span>
     <span class="ln"><span>A H</span></span>
   </h1>
   <div class="hero-bot">
     <p class="hero-bio">
-      <strong>3.5+ years</strong> leading digital product delivery across web and mobile.
-      Managed <strong>€2M+ European programmes</strong> across Austria, Netherlands &amp; Switzerland —
-      turning complex requirements into shipped products.<br><br>
+      <strong>4+ years</strong> delivering SaaS products, digital transformation initiatives, and AI-powered solutions across web and mobile ecosystems.<br><br>
+      Currently leading AI operations involving <strong>human-in-the-loop verification workflows</strong>, quality assurance processes, data operations, and cross-functional delivery teams.<br><br>
+      Managed <strong>European digital transformation programmes</strong> across Netherlands, Austria &amp; Switzerland — driving implementation, stakeholder alignment, and operational excellence.<br><br>
       <em id="typ"></em><span class="tcur"></span>
     </p>
     <div class="hero-nums">
       <div>
-        <div class="hnum-val">€2M+</div>
-        <div class="hnum-lbl">Project Value</div>
-      </div>
-      <div>
-        <div class="hnum-val">3.5yr</div>
-        <div class="hnum-lbl">Experience</div>
-      </div>
-      <div>
         <div class="hnum-val">4+</div>
+        <div class="hnum-lbl">Years Experience</div>
+      </div>
+      <div>
+        <div class="hnum-val">AI</div>
+        <div class="hnum-lbl">Operations Led</div>
+      </div>
+      <div>
+        <div class="hnum-val">3</div>
         <div class="hnum-lbl">EU Markets</div>
       </div>
     </div>
@@ -255,57 +281,57 @@ section{position:relative;z-index:2}
     <div class="scr-ln"></div>
   </div>
 </section>
-
+ 
 <!-- MARQUEE -->
 <div class="mq">
   <div class="mq-tr">
+    <span class="mq-i"><span class="ac">✦</span>AI Operations</span>
+    <span class="mq-i"><span class="ac">✦</span>SaaS Implementation</span>
     <span class="mq-i"><span class="ac">✦</span>Agile / Scrum</span>
-    <span class="mq-i"><span class="ac">✦</span>Product Roadmaps</span>
-    <span class="mq-i"><span class="ac">✦</span>Sprint Planning</span>
-    <span class="mq-i"><span class="ac">✦</span>€2M+ Programmes</span>
+    <span class="mq-i"><span class="ac">✦</span>Human-in-the-Loop</span>
+    <span class="mq-i"><span class="ac">✦</span>Digital Transformation</span>
     <span class="mq-i"><span class="ac">✦</span>European Markets</span>
     <span class="mq-i"><span class="ac">✦</span>Cross-Functional Teams</span>
-    <span class="mq-i"><span class="ac">✦</span>Figma Handoffs</span>
-    <span class="mq-i"><span class="ac">✦</span>Jira &amp; Confluence</span>
-    <span class="mq-i"><span class="ac">✦</span>MVP Prototyping</span>
     <span class="mq-i"><span class="ac">✦</span>Stakeholder Management</span>
-    <span class="mq-i"><span class="ac">✦</span>Agile / Scrum</span>
-    <span class="mq-i"><span class="ac">✦</span>Product Roadmaps</span>
     <span class="mq-i"><span class="ac">✦</span>Sprint Planning</span>
-    <span class="mq-i"><span class="ac">✦</span>€2M+ Programmes</span>
+    <span class="mq-i"><span class="ac">✦</span>RAG Platform</span>
+    <span class="mq-i"><span class="ac">✦</span>AI Operations</span>
+    <span class="mq-i"><span class="ac">✦</span>SaaS Implementation</span>
+    <span class="mq-i"><span class="ac">✦</span>Agile / Scrum</span>
+    <span class="mq-i"><span class="ac">✦</span>Human-in-the-Loop</span>
+    <span class="mq-i"><span class="ac">✦</span>Digital Transformation</span>
     <span class="mq-i"><span class="ac">✦</span>European Markets</span>
     <span class="mq-i"><span class="ac">✦</span>Cross-Functional Teams</span>
-    <span class="mq-i"><span class="ac">✦</span>Figma Handoffs</span>
-    <span class="mq-i"><span class="ac">✦</span>Jira &amp; Confluence</span>
-    <span class="mq-i"><span class="ac">✦</span>MVP Prototyping</span>
     <span class="mq-i"><span class="ac">✦</span>Stakeholder Management</span>
+    <span class="mq-i"><span class="ac">✦</span>Sprint Planning</span>
+    <span class="mq-i"><span class="ac">✦</span>RAG Platform</span>
   </div>
 </div>
-
+ 
 <!-- IMPACT -->
 <section class="imp" id="impact">
   <div class="slbl rv">01 / By the Numbers</div>
   <h2 class="stitle rv d1">Delivered<br>at Scale</h2>
   <div class="imp-grid">
     <div class="imp-c imp-c--h rv">
-      <div class="imp-n"><span class="sy">€</span>2M<span class="sy">+</span></div>
-      <div class="imp-d">Total project value managed across 2 major European digital transformation programmes</div>
+      <div class="imp-n">4<span class="sy">+</span></div>
+      <div class="imp-d">Years delivering SaaS, digital transformation &amp; AI-powered solutions across web and mobile</div>
     </div>
     <div class="imp-c rv d1">
-      <div class="imp-n">4</div>
-      <div class="imp-d">European stakeholder markets — Netherlands, Switzerland &amp; Austria across 3 major programmes</div>
+      <div class="imp-n">3</div>
+      <div class="imp-d">European markets managed — Netherlands, Switzerland &amp; Austria across major programmes</div>
     </div>
     <div class="imp-c rv d2">
       <div class="imp-n">12+</div>
-      <div class="imp-d">Team members coordinated across engineering, QA &amp; design simultaneously</div>
+      <div class="imp-d">Team members coordinated across engineering, QA, design &amp; data operations simultaneously</div>
     </div>
     <div class="imp-c rv d3">
-      <div class="imp-n">5</div>
-      <div class="imp-d">Platforms per product — Web, iOS &amp; Android delivered simultaneously</div>
+      <div class="imp-n">5–8</div>
+      <div class="imp-d">Concurrent delivery and AI operations workstreams managed across product, implementation, QA &amp; stakeholder teams</div>
     </div>
   </div>
 </section>
-
+ 
 <!-- SKILLS -->
 <section class="skl" id="skills">
   <div class="slbl rv">02 / Competencies</div>
@@ -313,21 +339,21 @@ section{position:relative;z-index:2}
   <div class="skl-grid">
     <div class="skl-c tlt rv">
       <div class="skl-n">01</div>
-      <div class="skl-t">Product &amp; Delivery</div>
+      <div class="skl-t">Project Management</div>
       <div class="skl-tags">
-        <span class="skl-tag">End-to-End Delivery</span><span class="skl-tag">Roadmap Planning</span>
-        <span class="skl-tag">Sprint Management</span><span class="skl-tag">Milestone Tracking</span>
-        <span class="skl-tag">Release Coordination</span><span class="skl-tag">MVP Prototyping</span>
+        <span class="skl-tag">Program Governance</span><span class="skl-tag">Sprint Planning</span>
+        <span class="skl-tag">Risk Management</span><span class="skl-tag">Stakeholder Reporting</span>
+        <span class="skl-tag">Project Delivery</span><span class="skl-tag">Cross-Functional Leadership</span>
       </div>
       <div class="skl-gly">01</div>
     </div>
     <div class="skl-c tlt rv d1">
       <div class="skl-n">02</div>
-      <div class="skl-t">Business Analysis</div>
+      <div class="skl-t">AI &amp; Product Operations</div>
       <div class="skl-tags">
-        <span class="skl-tag">Requirement Gathering</span><span class="skl-tag">Product Vision</span>
-        <span class="skl-tag">Workshop Facilitation</span><span class="skl-tag">User Story Writing</span>
-        <span class="skl-tag">Backlog Structuring</span><span class="skl-tag">Stakeholder Comms</span>
+        <span class="skl-tag">Human-in-the-Loop</span><span class="skl-tag">AI Verification</span>
+        <span class="skl-tag">QA Operations</span><span class="skl-tag">Data Validation</span>
+        <span class="skl-tag">KPI Tracking</span><span class="skl-tag">Operational Excellence</span>
       </div>
       <div class="skl-gly">02</div>
     </div>
@@ -354,7 +380,7 @@ section{position:relative;z-index:2}
     </div>
   </div>
 </section>
-
+ 
 <!-- EXPERIENCE -->
 <section class="exp" id="experience">
   <div class="slbl rv">03 / Career</div>
@@ -367,13 +393,14 @@ section{position:relative;z-index:2}
         <div class="exp-bdg">Current Role</div>
       </div>
       <div>
-        <div class="exp-role">IT Project Manager</div>
+        <div class="exp-role">Project Manager | AI Operations</div>
         <ul class="exp-pts">
-          <li>Lead end-to-end delivery of multiple digital products across web and mobile — roadmaps, sprint plans, milestones, and stakeholder expectations simultaneously.</li>
-          <li>Translate complex business requirements into structured backlogs, user stories, and execution roadmaps; facilitate discovery sessions to align teams.</li>
-          <li>Coordinate cross-functional teams of 6–12 (backend engineers, mobile developers, designers, QA testers) in agile environments.</li>
-          <li>Manage international client relationships across European time zones — Netherlands (Resident Management), Switzerland &amp; Austria (FarmTool, SSO Tool) — as part of €2M+ programmes.</li>
-          <li>Built process automation tools using Google Apps Script to eliminate workflow inefficiencies.</li>
+          <li>Lead end-to-end delivery of SaaS, web, mobile, and AI-driven initiatives across multiple concurrent workstreams.</li>
+          <li>Manage project planning, sprint execution, stakeholder communication, risk tracking, and release readiness across distributed teams.</li>
+          <li>Coordinate cross-functional teams of developers, QA engineers, designers, data specialists, and business stakeholders.</li>
+          <li>Drive AI operations through human-in-the-loop verification workflows, output validation processes, and quality assurance frameworks supporting production-ready AI systems.</li>
+          <li>Own client communication across European programmes spanning Netherlands, Austria, and Switzerland while aligning delivery goals with business objectives.</li>
+          <li>Develop SOPs, governance processes, dashboards, and automation solutions using Google Apps Script to improve operational efficiency and delivery visibility.</li>
         </ul>
       </div>
     </div>
@@ -394,7 +421,7 @@ section{position:relative;z-index:2}
     </div>
   </div>
 </section>
-
+ 
 <!-- PROJECTS -->
 <section class="prj" id="projects">
   <div class="prj-hd">
@@ -402,70 +429,205 @@ section{position:relative;z-index:2}
     <h2 class="stitle rv d1">Key Projects</h2>
   </div>
   <div class="prj-sw">
+ 
+    <!-- 01 AI Operations -->
     <div class="prj-c prj-c--h tlt">
+      <div class="prj-ct">
+        <span class="prj-tag">AI Operations · RAG Platform</span>
+        <div class="prj-ar">↗</div>
+      </div>
+      <div class="prj-title">AI Product Operations</div>
+      <div class="prj-sub">Human-in-the-Loop Verification · AI Quality Operations</div>
+      <div class="prj-prao">
+        <div class="prao-block">
+          <div class="prao-label">Problem</div>
+          <div class="prao-text">AI-generated responses required manual verification before delivery to ensure quality, accuracy, and consistency — with SLA adherence and coordination across a review team.</div>
+        </div>
+        <div class="prao-block">
+          <div class="prao-label">Role</div>
+          <div class="prao-text"><strong>Project Manager / AI Operations Lead</strong> — coordinating verification workflows, aligning reviewers with delivery priorities, and maintaining operational readiness.</div>
+        </div>
+        <div class="prao-block">
+          <div class="prao-label">Actions</div>
+          <ul class="prao-actions">
+            <li>Managed human-in-the-loop verification workflows</li>
+            <li>Coordinated data reviewers and validation activities</li>
+            <li>Prioritized verification queues and delivery requirements</li>
+            <li>Monitored output quality and issue resolution</li>
+          </ul>
+        </div>
+        <div class="prao-block">
+          <div class="prao-label">Outcome</div>
+          <div class="prao-outcome">Enabled reliable verification for AI-generated outputs — improving delivery confidence, reducing quality risks, and supporting scalable AI deployment.</div>
+        </div>
+      </div>
+      <div class="prj-chips" style="margin-top:1.5rem">
+        <span class="prj-chip">AI Operations</span><span class="prj-chip">RAG</span>
+        <span class="prj-chip">Human-in-the-Loop</span><span class="prj-chip">QA</span>
+        <span class="prj-chip">Data Operations</span>
+      </div>
+      <div class="prj-num">01</div>
+    </div>
+ 
+    <!-- 02 Resident Management -->
+    <div class="prj-c tlt">
       <div class="prj-ct">
         <span class="prj-tag">Web · iOS · Android · Netherlands</span>
         <div class="prj-ar">↗</div>
       </div>
       <div class="prj-title">Resident Management Platform</div>
-      <div class="prj-sub">Digital Transformation · €2M+ Programme · Netherlands</div>
-      <div class="prj-desc">Helping a Netherlands-based European organisation go fully digital — admin web portal, iOS &amp; Android apps. Managed stakeholders across the Netherlands from discovery through launch.</div>
-      <div class="prj-chips">
-        <span class="prj-chip">€2M+ Budget</span><span class="prj-chip">Netherlands</span>
-        <span class="prj-chip">Agile</span><span class="prj-chip">Figma</span><span class="prj-chip">Team of 10</span>
+      <div class="prj-sub">Digital Transformation · Netherlands</div>
+      <div class="prj-prao">
+        <div class="prao-block">
+          <div class="prao-label">Problem</div>
+          <div class="prao-text">A European housing organisation relied on fragmented processes for managing residents, requests, and communication across multiple disconnected channels.</div>
+        </div>
+        <div class="prao-block">
+          <div class="prao-label">Role</div>
+          <div class="prao-text"><strong>Project Manager</strong> — end-to-end delivery across product, engineering, QA, design, and client stakeholders.</div>
+        </div>
+        <div class="prao-block">
+          <div class="prao-label">Actions</div>
+          <ul class="prao-actions">
+            <li>Conducted stakeholder discovery workshops</li>
+            <li>Managed sprint planning and backlog prioritization</li>
+            <li>Coordinated developers, designers, and QA teams</li>
+            <li>Managed client communication and delivery governance</li>
+          </ul>
+        </div>
+        <div class="prao-block">
+          <div class="prao-label">Outcome</div>
+          <div class="prao-outcome">Delivered a unified resident management platform across web, iOS, and Android — enabling more efficient management of all resident-related activities.</div>
+        </div>
       </div>
-      <div class="prj-num">01</div>
-    </div>
-    <div class="prj-c tlt">
-      <div class="prj-ct">
-        <span class="prj-tag">Climate · Carbon · Switzerland · Austria</span>
-        <div class="prj-ar">↗</div>
-      </div>
-      <div class="prj-title">FarmTool</div>
-      <div class="prj-sub">Carbon Emission &amp; Sustainability Certification · Switzerland &amp; Austria</div>
-      <div class="prj-desc">€2M+ platform for a Swiss &amp; Austrian sustainability certification body — digitising carbon emission tracking and compliance workflows for agricultural organisations across Europe.</div>
-      <div class="prj-chips">
-        <span class="prj-chip">€2M+ Budget</span><span class="prj-chip">Switzerland</span>
-        <span class="prj-chip">Austria</span><span class="prj-chip">Carbon Tracking</span>
-        <span class="prj-chip">Compliance</span><span class="prj-chip">Team of 12</span>
+      <div class="prj-chips" style="margin-top:1.5rem">
+        <span class="prj-chip">Netherlands</span><span class="prj-chip">Digital Transformation</span>
+        <span class="prj-chip">Agile</span><span class="prj-chip">Team of 10</span>
       </div>
       <div class="prj-num">02</div>
     </div>
+ 
+    <!-- 03 FarmTool -->
     <div class="prj-c tlt">
       <div class="prj-ct">
-        <span class="prj-tag">Web App · Austria · Switzerland</span>
+        <span class="prj-tag">Sustainability · Switzerland · Austria</span>
         <div class="prj-ar">↗</div>
       </div>
-      <div class="prj-title">SSO &amp; Access Management Tool</div>
-      <div class="prj-sub">Identity · Login · Role Management · Austria &amp; Switzerland</div>
-      <div class="prj-desc">Led delivery of a centralised SSO tool for a multi-product suite — handling user login, role creation, and access permissions across tools for clients in Austria and Switzerland.</div>
-      <div class="prj-chips">
-        <span class="prj-chip">SSO</span><span class="prj-chip">Role Management</span>
-        <span class="prj-chip">Austria</span><span class="prj-chip">Switzerland</span>
-        <span class="prj-chip">Tool Suite</span>
+      <div class="prj-title">FarmTool</div>
+      <div class="prj-sub">Sustainability &amp; Certification Platform · Switzerland &amp; Austria</div>
+      <div class="prj-prao">
+        <div class="prao-block">
+          <div class="prao-label">Problem</div>
+          <div class="prao-text">Rigid certification workflows required developer involvement for every business rule change — slowing operations and reducing flexibility for business users.</div>
+        </div>
+        <div class="prao-block">
+          <div class="prao-label">Role</div>
+          <div class="prao-text"><strong>Project Manager</strong> — coordinating platform revamp across engineering, QA, product, and business stakeholders.</div>
+        </div>
+        <div class="prao-block">
+          <div class="prao-label">Actions</div>
+          <ul class="prao-actions">
+            <li>Facilitated requirement workshops with stakeholders</li>
+            <li>Identified workflow bottlenecks and dependencies</li>
+            <li>Managed sprint execution and release planning</li>
+            <li>Supported redesign of workflow configuration capabilities</li>
+          </ul>
+        </div>
+        <div class="prao-block">
+          <div class="prao-label">Outcome</div>
+          <div class="prao-outcome">Delivered a configurable platform that reduced reliance on development teams for operational changes and enabled faster adaptation to compliance requirements.</div>
+        </div>
+      </div>
+      <div class="prj-chips" style="margin-top:1.5rem">
+        <span class="prj-chip">Switzerland</span><span class="prj-chip">Austria</span>
+        <span class="prj-chip">Compliance</span><span class="prj-chip">Team of 12</span>
       </div>
       <div class="prj-num">03</div>
     </div>
+ 
+    <!-- 04 SSO -->
     <div class="prj-c tlt">
       <div class="prj-ct">
-        <span class="prj-tag">Internal · Automation</span>
+        <span class="prj-tag">Identity · Austria · Switzerland</span>
         <div class="prj-ar">↗</div>
       </div>
-      <div class="prj-title">Automation &amp; MVP Initiatives</div>
-      <div class="prj-sub">Process Innovation</div>
-      <div class="prj-desc">Independently conceptualised and validated early-stage MVPs using design thinking. Built Google Apps Script automation tools to eliminate manual processes and improve team productivity.</div>
-      <div class="prj-chips">
-        <span class="prj-chip">Apps Script</span><span class="prj-chip">Design Thinking</span><span class="prj-chip">MVP</span>
+      <div class="prj-title">SSO &amp; Access Management</div>
+      <div class="prj-sub">Centralised Authentication · Role Management</div>
+      <div class="prj-prao">
+        <div class="prao-block">
+          <div class="prao-label">Problem</div>
+          <div class="prao-text">Users across multiple products required separate authentication processes — creating administrative complexity and inconsistent user experiences.</div>
+        </div>
+        <div class="prao-block">
+          <div class="prao-label">Role</div>
+          <div class="prao-text"><strong>Project Manager</strong> — coordinating delivery across engineering, QA, and business stakeholders in Austria and Switzerland.</div>
+        </div>
+        <div class="prao-block">
+          <div class="prao-label">Actions</div>
+          <ul class="prao-actions">
+            <li>Gathered authentication and access management requirements</li>
+            <li>Structured delivery roadmaps and sprint plans</li>
+            <li>Managed stakeholder reviews and acceptance</li>
+            <li>Oversaw testing and release readiness</li>
+          </ul>
+        </div>
+        <div class="prao-block">
+          <div class="prao-label">Outcome</div>
+          <div class="prao-outcome">Delivered a centralised authentication solution that streamlined user access, improved administrative control, and provided a scalable foundation for future integrations.</div>
+        </div>
+      </div>
+      <div class="prj-chips" style="margin-top:1.5rem">
+        <span class="prj-chip">SSO</span><span class="prj-chip">Role Management</span>
+        <span class="prj-chip">Austria</span><span class="prj-chip">Switzerland</span>
       </div>
       <div class="prj-num">04</div>
     </div>
+ 
+    <!-- 05 Automation -->
+    <div class="prj-c tlt">
+      <div class="prj-ct">
+        <span class="prj-tag">Internal · Process Improvement</span>
+        <div class="prj-ar">↗</div>
+      </div>
+      <div class="prj-title">Automation &amp; MVP Initiatives</div>
+      <div class="prj-sub">Process Improvement &amp; Internal Tooling</div>
+      <div class="prj-prao">
+        <div class="prao-block">
+          <div class="prao-label">Problem</div>
+          <div class="prao-text">Internal operations involved repetitive manual processes — creating unnecessary administrative effort and reducing team efficiency.</div>
+        </div>
+        <div class="prao-block">
+          <div class="prao-label">Role</div>
+          <div class="prao-text"><strong>Project Manager &amp; Process Improvement Lead</strong> — identifying and eliminating operational bottlenecks.</div>
+        </div>
+        <div class="prao-block">
+          <div class="prao-label">Actions</div>
+          <ul class="prao-actions">
+            <li>Identified bottlenecks and validated improvement opportunities</li>
+            <li>Designed MVP concepts using design thinking</li>
+            <li>Built automation tools using Google Apps Script</li>
+            <li>Coordinated adoption across teams</li>
+          </ul>
+        </div>
+        <div class="prao-block">
+          <div class="prao-label">Outcome</div>
+          <div class="prao-outcome">Reduced manual effort, improved process consistency, and enabled teams to focus more time on delivery and operational priorities.</div>
+        </div>
+      </div>
+      <div class="prj-chips" style="margin-top:1.5rem">
+        <span class="prj-chip">Apps Script</span><span class="prj-chip">Design Thinking</span>
+        <span class="prj-chip">Process Automation</span>
+      </div>
+      <div class="prj-num">05</div>
+    </div>
+ 
   </div>
   <div style="margin-top:1.5rem;padding-right:3rem;display:flex;gap:.6rem;align-items:center">
-    <span style="font-family:'Syne Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Drag to explore</span>
+    <span style="font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Drag to explore</span>
     <span style="color:var(--accent)">→</span>
   </div>
 </section>
-
+ 
 <!-- EDUCATION -->
 <section class="edu" id="education">
   <div class="slbl rv">05 / Education</div>
@@ -483,12 +645,12 @@ section{position:relative;z-index:2}
     </div>
   </div>
 </section>
-
+ 
 <!-- CONTACT -->
 <section class="cta" id="contact">
   <div class="slbl rv" style="justify-content:center">06 / Let's Talk</div>
   <div class="cta-big rv d1">Let's<br><em>Build</em><br>Together</div>
-  <p class="cta-sub rv d2">Open to product &amp; delivery roles, consulting, and collaborations.</p>
+  <p class="cta-sub rv d2">Open to Project Management, AI Operations, SaaS Implementation &amp; consulting roles.</p>
   <div class="cta-btns rv d3">
     <a href="mailto:aashikah98@gmail.com" class="btn-a">✉ Email Me</a>
     <a href="https://linkedin.com/in/ashikah" target="_blank" class="btn-g">LinkedIn →</a>
@@ -500,7 +662,7 @@ section{position:relative;z-index:2}
     &nbsp;·&nbsp; © 2025 Ashik A H
   </div>
 </section>
-
+ 
 <script>
 (function(){
   // LOADER
@@ -522,7 +684,7 @@ section{position:relative;z-index:2}
   }
   window.addEventListener('load',function(){setTimeout(hideLdr,1800);});
   setTimeout(hideLdr,3500);
-
+ 
   // CANVAS PARTICLES
   var cv=document.getElementById('cv');
   var ctx=cv.getContext('2d');
@@ -542,13 +704,13 @@ section{position:relative;z-index:2}
       if(p.x<0)p.x=W;if(p.x>W)p.x=0;
       if(p.y<0)p.y=H;if(p.y>H)p.y=0;
       ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(200,241,53,.3)';ctx.fill();
+      ctx.fillStyle='rgba(79,126,247,.25)';ctx.fill();
       for(var j=i+1;j<pts.length;j++){
         var q=pts[j];
         var dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);
         if(d<130){
           ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
-          ctx.strokeStyle='rgba(200,241,53,'+(1-d/130)*.07+')';
+          ctx.strokeStyle='rgba(79,126,247,'+(1-d/130)*.07+')';
           ctx.lineWidth=.5;ctx.stroke();
         }
       }
@@ -556,7 +718,7 @@ section{position:relative;z-index:2}
     requestAnimationFrame(draw);
   }
   draw();
-
+ 
   // CURSOR
   var dot=document.getElementById('cdot');
   var ring=document.getElementById('cring');
@@ -565,7 +727,7 @@ section{position:relative;z-index:2}
     mx=e.clientX;my=e.clientY;
     dot.style.left=mx+'px';dot.style.top=my+'px';
     var sp=document.getElementById('spot');
-    if(sp){sp.style.background='radial-gradient(circle 350px at '+mx+'px '+my+'px,rgba(200,241,53,.035) 0%,transparent 70%)';}
+    if(sp){sp.style.background='radial-gradient(circle 350px at '+mx+'px '+my+'px,rgba(79,126,247,.04) 0%,transparent 70%)';}
   });
   (function ar(){
     rx+=(mx-rx)*.1;ry+=(my-ry)*.1;
@@ -580,21 +742,21 @@ section{position:relative;z-index:2}
     dot.style.display='none';ring.style.display='none';
     var sp=document.getElementById('spot');if(sp)sp.style.display='none';
   }
-
+ 
   // NAV SCROLL
   var nav=document.getElementById('nav');
   window.addEventListener('scroll',function(){
     if(window.scrollY>60)nav.classList.add('sc');
     else nav.classList.remove('sc');
   },{passive:true});
-
+ 
   // SCROLL REVEAL
   var rvEls=document.querySelectorAll('.rv,.rvs');
   var obs=new IntersectionObserver(function(entries){
     entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});
   },{threshold:.1});
   rvEls.forEach(function(el){obs.observe(el);});
-
+ 
   // 3D TILT
   document.querySelectorAll('.tlt').forEach(function(card){
     card.addEventListener('mousemove',function(e){
@@ -609,9 +771,9 @@ section{position:relative;z-index:2}
       card.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)';
     });
   });
-
+ 
   // TYPED TEXT
-  var phrases=['Turning vision into shipped products','Leading cross-functional teams','Managing EU programmes end-to-end','Bridging business & technology','Agile delivery at scale'];
+  var phrases=['Turning vision into shipped products','Leading AI operations end-to-end','SaaS implementation specialist','Bridging business & technology','Managing cross-functional teams globally'];
   var pi=0,ci=0,del=false;
   var te=document.getElementById('typ');
   if(te){
@@ -622,7 +784,7 @@ section{position:relative;z-index:2}
     }
     setTimeout(tick,2600);
   }
-
+ 
   // MAGNETIC BUTTONS
   document.querySelectorAll('.btn-a,.btn-g,.nav-btn').forEach(function(btn){
     btn.addEventListener('mousemove',function(e){
